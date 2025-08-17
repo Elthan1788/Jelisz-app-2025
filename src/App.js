@@ -117,9 +117,12 @@ const App = () => {
       return;
     }
 
-    if (formData.deliveryOption === 'delivery' && !formData.recipientName && formData.isGift) { // Added isGift check
-      showModal('请填写收件人姓名。| Please provide the recipient\'s name for delivery.');
-      return;
+    // Validation for delivery details if delivery option is selected
+    if (formData.deliveryOption === 'delivery') {
+      if (!formData.recipientName || !formData.deliveryAddress) { // recipientMobile is optional
+        showModal('请填写所有必填的配送信息（收件人姓名、送货地址）。| Please fill in all required delivery information (Recipient Name, Delivery Address).');
+        return;
+      }
     }
 
 
@@ -315,12 +318,62 @@ const App = () => {
             </div>
           </div>
 
-          {/* Gifting Information (Conditional) */}
+          {/* Delivery Details (Conditional on deliveryOption) */}
           {formData.deliveryOption === 'delivery' && (
             <div className="p-5 bg-amber-50 rounded-lg shadow-inner">
               <h2 className="text-xl md:text-2xl font-bold text-amber-700 mb-4">
-                送礼信息 (如适用) | Gifting Information (If applicable)
+                配送详情 | Delivery Details
               </h2>
+              <p className="text-gray-600 mb-4 text-sm md:text-base">
+                请填写收件人信息。如果不是送礼，请填写您的收件信息。| Please fill in recipient details. If this is not a gift, please fill in your own delivery details.
+              </p>
+              <div className="space-y-4 mb-6">
+                <div>
+                  <label htmlFor="recipientName" className="block text-gray-800 font-semibold mb-2">
+                    收件人姓名 <span className="text-red-500">*</span> | Recipient's Name <span className="text-red-500">*</span>
+                  </label>
+                  <input
+                    type="text"
+                    id="recipientName"
+                    name="recipientName"
+                    value={formData.recipientName}
+                    onChange={handleChange}
+                    className="w-full p-3 border border-amber-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500"
+                    required={formData.deliveryOption === 'delivery'}
+                  />
+                </div>
+                <div>
+                  <label htmlFor="recipientMobile" className="block text-gray-800 font-semibold mb-2">
+                    收件人联系号码 (最好是WhatsApp) | Recipient's Contact Number (WhatsApp preferred)
+                  </label>
+                  <input
+                    type="tel"
+                    id="recipientMobile"
+                    name="recipientMobile"
+                    value={formData.recipientMobile}
+                    onChange={handleChange}
+                    className="w-full p-3 border border-amber-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500"
+                    pattern="[0-9]{8,15}"
+                    title="请输入有效的手机号码 (8-15位数字) | Please enter a valid mobile number (8-15 digits)"
+                  />
+                </div>
+                <div>
+                  <label htmlFor="deliveryAddress" className="block text-gray-800 font-semibold mb-2">
+                    送货地址 <span className="text-red-500">*</span> | Delivery Address <span className="text-red-500">*</span>
+                  </label>
+                  <textarea
+                    id="deliveryAddress"
+                    name="deliveryAddress"
+                    rows="3"
+                    value={formData.deliveryAddress}
+                    onChange={handleChange}
+                    className="w-full p-3 border border-amber-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500"
+                    required={formData.deliveryOption === 'delivery'}
+                  ></textarea>
+                </div>
+              </div>
+
+              {/* Is Gift Question and Gift Message (Conditional on deliveryOption AND isGift) */}
               <div className="mb-4">
                 <label className="block text-gray-800 font-semibold mb-2">
                   此订单是否作为礼物送给他人？ | Is this order a gift for someone else?
@@ -352,63 +405,18 @@ const App = () => {
               </div>
 
               {formData.isGift && (
-                <div className="space-y-4">
-                  <div>
-                    <label htmlFor="recipientName" className="block text-gray-800 font-semibold mb-2">
-                      收件人姓名 <span className="text-red-500">*</span> | Recipient's Name <span className="text-red-500">*</span>
-                    </label>
-                    <input
-                      type="text"
-                      id="recipientName"
-                      name="recipientName"
-                      value={formData.recipientName}
-                      onChange={handleChange}
-                      className="w-full p-3 border border-amber-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500"
-                      required={formData.deliveryOption === 'delivery' && formData.isGift} // Required only if gift and delivery
-                    />
-                  </div>
-                  <div>
-                    <label htmlFor="recipientMobile" className="block text-gray-800 font-semibold mb-2">
-                      收件人联系号码 (最好是WhatsApp) | Recipient's Contact Number (WhatsApp preferred)
-                    </label>
-                    <input
-                      type="tel"
-                      id="recipientMobile"
-                      name="recipientMobile"
-                      value={formData.recipientMobile}
-                      onChange={handleChange}
-                      className="w-full p-3 border border-amber-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500"
-                      pattern="[0-9]{8,15}"
-                      title="请输入有效的手机号码 (8-15位数字) | Please enter a valid mobile number (8-15 digits)"
-                    />
-                  </div>
-                  <div>
-                    <label htmlFor="deliveryAddress" className="block text-gray-800 font-semibold mb-2">
-                      送货地址 <span className="text-red-500">*</span> | Delivery Address <span className="text-red-500">*</span>
-                    </label>
-                    <textarea
-                      id="deliveryAddress"
-                      name="deliveryAddress"
-                      rows="3"
-                      value={formData.deliveryAddress}
-                      onChange={handleChange}
-                      className="w-full p-3 border border-amber-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500"
-                      required={formData.deliveryOption === 'delivery'}
-                    ></textarea>
-                  </div>
-                  <div>
-                    <label htmlFor="giftMessage" className="block text-gray-800 font-semibold mb-2">
-                      您想为收件人写一句祝福语吗？ (可选) | Would you like to include a personalized message for the recipient? (Optional)
-                    </label>
-                    <textarea
-                      id="giftMessage"
-                      name="giftMessage"
-                      rows="2"
-                      value={formData.giftMessage}
-                      onChange={handleChange}
-                      className="w-full p-3 border border-amber-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500"
-                    ></textarea>
-                  </div>
+                <div>
+                  <label htmlFor="giftMessage" className="block text-gray-800 font-semibold mb-2">
+                    您想为收件人写一句祝福语吗？ (可选) | Would you like to include a personalized message for the recipient? (Optional)
+                  </label>
+                  <textarea
+                    id="giftMessage"
+                    name="giftMessage"
+                    rows="2"
+                    value={formData.giftMessage}
+                    onChange={handleChange}
+                    className="w-full p-3 border border-amber-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500"
+                  ></textarea>
                 </div>
               )}
             </div>
