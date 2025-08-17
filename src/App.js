@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
-// 确保您在 src/index.js 或 src/main.js 中导入了 src/index.css 文件，以便 Tailwind CSS 样式生效。
 
 const App = () => {
   // State for form data
   const [formData, setFormData] = useState({
     customerName: '',
     customerMobile: '',
-    mooncakeQuantities: {
+    mooncakeQuantities:{
       mochaHazelnut: 0,
       pistachioCheese: 0,
       yamCoconut: 0,
@@ -36,30 +35,30 @@ const App = () => {
   // Mooncake flavor definitions
   const mooncakeFlavors = {
     snowSkin: [
-      { id: 'mochaHazelnut', name: 'Mocha Hazelnut', nameZh: '摩卡榛果' },
-      { id: 'pistachioCheese', name: 'Pistachio Cheese', nameZh: '开心果芝士' },
-      { id: 'yamCoconut', name: 'Yam Coconut', nameZh: '椰香芋泥' },
-      { id: 'berriesYogurt', name: 'Berries Yogurt', nameZh: '莓果酸奶' },
-      { id: 'Snowskin Set', name: 'Set， 4 flavours', nameZh: '套装 4个口味' },
+      { id: 'mochaHazelnut', displayName: '摩卡榛果 Mocha Hazelnut' },
+      { id: 'pistachioCheese', displayName: '开心果芝士 Pistachio Cheese' },
+      { id: 'yamCoconut', displayName: '椰香芋泥 Yam Coconut' },
+      { id: 'berriesYogurt', displayName: '莓果酸奶 Berries Yogurt' },
+      { id: 'Snowskin Set', displayName: '冰皮套装 4个口味 Snowskin Set (4 flavours)' },
     ],
     traditional: [
-      { id: 'redBean', name: 'Red Bean', nameZh: '红豆' },
-      { id: 'mixedNuts', name: 'Mixed Nuts', nameZh: '伍仁' },
-      { id: 'whiteLotusSingleYolk', name: 'White Lotus Single YM', nameZh: '白莲单黄' },
-      { id: 'pandanLotusSingleYolk', name: 'Pandan Lotus Single Yolk', nameZh: '翡翠莲蓉单黄' }, // Corrected name consistency
-      { id: 'Traditional Set', name: 'Traditional Set', nameZh: '传统套装 4个口味' },
+      { id: 'redBean', displayName: '红豆 Red Bean' },
+      { id: 'mixedNuts', displayName: '伍仁 Mixed Nuts' },
+      { id: 'whiteLotusSingleYolk', displayName: '白莲单黄 White Lotus Single Yolk' },
+      { id: 'pandanLotusSingleYolk', displayName: '翡翠莲蓉单黄 Pandan Lotus Single Yolk' },
+      { id: 'Traditional Set', displayName: '传统套装 4个口味 Traditional Set (4 flavours)' },
     ],
     jelly: [
-      { id: 'jellyMooncakeSet', name: 'Jelly Mooncake Set', nameZh: '果冻月饼礼盒' },
+      { id: 'jellyMooncakeSet', displayName: '菜燕月饼套装 Jelly Mooncake Set' },
     ],
   };
 
   // Pickup batch dates
   const pickupBatches = [
-    { date: '13 Sept 2025', dateZh: '2025年9月13日 (第一批)' },
-    { date: '20 Sept 2025', dateZh: '2025年9月20日 (第二批)' },
-    { date: '27 Sept 2025', dateZh: '2025年9月27日 (第三批)' },
-    { date: '04 Oct 2025', dateZh: '2025年10月4日 (第四批)' },
+    { date: 'Batch 1 - 13 Sept 2025'},
+    { date: 'Batch 2 - 20 Sept 2025'},
+    { date: 'Batch 3 - 27 Sept 2025'},
+    { date: 'Batch 4 - 04 Oct 2025'},
   ];
 
   // Handle input changes
@@ -143,11 +142,11 @@ const App = () => {
           双丽月饼预购单 <br /> Jelisz Mooncake Order Form
         </h1>
         <p className="text-gray-700 text-center mb-8 text-sm md:text-base">
-          感谢您对我们手工制作月饼的支持！请填写以下表格进行预购。请注意，我们是住家式烘培，所有月饼都是新鲜制作，且数量有限。如有任何疑问，请联系我们：
+          感谢您对我们手工制作月饼的支持！请填写以下表格进行预购。我们是住家式烘培，所有月饼都是新鲜制作。如有任何疑问，请联系我们：
           <a href="tel:0168502845" className="text-amber-600 hover:underline">Jess 0168502845</a> 或
           <a href="tel:0168741586" className="text-amber-600 hover:underline"> Liz 0168741586</a>。
           <br /><br />
-          Thank you for supporting our homemade mooncakes! Please fill out the form below to place your order. As a home-based bakery, all our mooncakes are freshly made, and quantities are limited. If you have any questions, please contact us at
+          Thank you for supporting our homemade mooncakes! Please fill out the form below to place your order. As a home-based bakery, all our mooncakes are freshly made. If you have any questions, please contact us at
           <a href="tel:0168502845" className="text-amber-600 hover:underline"> Jess 0168502845</a> or
           <a href="tel:0168741586" className="text-amber-600 hover:underline"> Liz 0168741586</a>.
         </p>
@@ -198,17 +197,17 @@ const App = () => {
               选择您的月饼 | Choose Your Mooncakes
             </h2>
             <p className="text-gray-600 mb-4 text-sm md:text-base">
-              请选择您想预订的月饼口味和数量。每盒通常有4个。| Please select the flavors and quantity you would like to order. A box usually contains 4 pieces.
+              请选择您想预订的月饼口味和数量。| Please select the flavors and quantity you would like to order.
             </p>
 
             {/* Snow Skin Series */}
-            <h3 className="text-lg md:text-xl font-semibold text-amber-600 mb-3">
-              a. 冰皮月饼系列 (Snow Skin Series)
+            <h3 className="text-lg md:text-xl font-semibold text-yellow-700 mb-3">
+              a. 冰皮月饼系列 Snowskin Series
             </h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
               {mooncakeFlavors.snowSkin.map((flavor) => (
-                <div key={flavor.id} className="flex items-center justify-between bg-white p-3 rounded-lg shadow-sm border border-amber-200">
-                  <span className="text-gray-700">{flavor.nameZh} ({flavor.name})</span>
+                <div key={flavor.id} className="flex items-center justify-between bg-white p-3 rounded-lg shadow-sm border border-yellow-200">
+                  <span className="text-gray-700">{flavor.displayName}</span>
                   <input
                     type="number"
                     min="0"
@@ -221,13 +220,13 @@ const App = () => {
             </div>
 
             {/* Traditional Series */}
-            <h3 className="text-lg md:text-xl font-semibold text-amber-600 mb-3">
-              b. 传统烘皮月饼系列 (Traditional Baked Series)
+            <h3 className="text-lg md:text-xl font-semibold text-orange-700 mb-3">
+              b. 传统烤皮月饼系列 Traditional Baked Series
             </h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
               {mooncakeFlavors.traditional.map((flavor) => (
-                <div key={flavor.id} className="flex items-center justify-between bg-white p-3 rounded-lg shadow-sm border border-amber-200">
-                  <span className="text-gray-700">{flavor.nameZh} ({flavor.name})</span>
+                <div key={flavor.id} className="flex items-center justify-between bg-white p-3 rounded-lg shadow-sm border border-orange-200">
+                  <span className="text-gray-700">{flavor.displayName}</span>
                   <input
                     type="number"
                     min="0"
@@ -240,21 +239,21 @@ const App = () => {
             </div>
 
             {/* Jelly Series */}
-            <h3 className="text-lg md:text-xl font-semibold text-amber-600 mb-3">
-              c. 果冻月饼礼盒 (Jelly Mooncake Set)
+            <h3 className="text-lg md:text-xl font-semibold text-pink-700 mb-3">
+              c. 菜燕月饼系列 Jelly Mooncake Series
             </h3>
             <p className="text-gray-600 mb-4 text-sm md:text-base">
-              备注：每套包含4个不同口味（芒果西米、芋头红豆、香兰玉米、椰糖马蹄）。| Note: Each set contains 4 different flavors (Mango Sago, Yam Red Bean, Pandan Sweet Corn, Gula Melaka Water Chestnut).
+              一套包含以下四种口味（芒果西米、芋头红豆、香兰玉米、椰糖马蹄）。| Note: Each set contains 4 different flavours (Mango Sago, Yam Red Bean, Pandan Sweet Corn, Gula Melaka Water Chestnut).
             </p>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-              {mooncakeFlavors.jelly.map((flavor) => (
-                <div key={flavor.id} className="flex items-center justify-between bg-white p-3 rounded-lg shadow-sm border border-amber-200">
-                  <span className="text-gray-700">{flavor.nameZh} ({flavor.name})</span>
+              {mooncakeFlavors.jelly.map((flavour) => (
+                <div key={flavour.id} className="flex items-center justify-between bg-white p-3 rounded-lg shadow-sm border border-pink-200">
+                  <span className="text-gray-700">{flavour.displayName}</span>
                   <input
                     type="number"
                     min="0"
-                    value={formData.mooncakeQuantities[flavor.id]}
-                    onChange={(e) => handleMooncakeQuantityChange(flavor.id, e.target.value)}
+                    value={formData.mooncakeQuantities[flavour.id]}
+                    onChange={(e) => handleMooncakeQuantityChange(flavour.id, e.target.value)}
                     className="w-20 p-2 border border-amber-300 rounded-lg text-center focus:outline-none focus:ring-1 focus:ring-amber-400"
                   />
                 </div>
@@ -282,7 +281,7 @@ const App = () => {
                 <option value="">-- 请选择 -- | -- Please select --</option>
                 {pickupBatches.map((batch) => (
                   <option key={batch.date} value={batch.date}>
-                    {batch.dateZh} ({batch.date})
+                    {batch.date}
                   </option>
                 ))}
               </select>
@@ -326,7 +325,7 @@ const App = () => {
                 配送详情 | Delivery Details
               </h2>
               <p className="text-gray-600 mb-4 text-sm md:text-base">
-                请填写收件人信息。如果不是送礼，请填写您的收件信息。| Please fill in recipient details. If this is not a gift, please fill in your own delivery details.
+                请填写收件人/收礼人的信息。| Please fill in recipient details.
               </p>
               <div className="space-y-4 mb-6">
                 <div>
@@ -345,7 +344,7 @@ const App = () => {
                 </div>
                 <div>
                   <label htmlFor="recipientMobile" className="block text-gray-800 font-semibold mb-2">
-                    收件人联系号码 (最好是WhatsApp) | Recipient's Contact Number (WhatsApp preferred)
+                    收件人联系号码 (WhatsApps) | Recipient's Contact Number (WhatsApps)
                   </label>
                   <input
                     type="tel"
@@ -377,7 +376,7 @@ const App = () => {
               {/* Is Gift Question and Gift Message (Conditional on deliveryOption AND isGift) */}
               <div className="mb-4">
                 <label className="block text-gray-800 font-semibold mb-2">
-                  此订单是否作为礼物送给他人？ | Is this order a gift for someone else?
+                  此订单是否为赠礼？ | Is this order a gift?
                 </label>
                 <div className="flex space-x-4">
                   <label className="inline-flex items-center">
@@ -408,7 +407,7 @@ const App = () => {
               {formData.isGift && (
                 <div>
                   <label htmlFor="giftMessage" className="block text-gray-800 font-semibold mb-2">
-                    您想为收件人写一句祝福语吗？ (可选) | Would you like to include a personalized message for the recipient? (Optional)
+                    需要附上一段祝福给收礼人吗？ (可选) | Would you like to write a note for the recipient? (Optional)
                   </label>
                   <textarea
                     id="giftMessage"
@@ -430,7 +429,7 @@ const App = () => {
             </h2>
             <div>
               <label htmlFor="additionalNotes" className="block text-gray-800 font-semibold mb-2">
-                任何其他备注或特别要求？ (例如：对某些食材过敏等) | Any other notes or special requests? (e.g., food allergies, etc.)
+                任何其他备注或特别要求？  | Any other notes or special requests? 
               </label>
               <textarea
                 id="additionalNotes"
