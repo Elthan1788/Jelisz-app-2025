@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+// 确保您在 src/index.js 或 src/main.js 中导入了 src/index.css 文件，以便 Tailwind CSS 样式生效。
 
 const App = () => {
   // State for form data
@@ -469,8 +470,6 @@ const App = () => {
           </div>
         )}
       </div>
-      {/* Tailwind CSS CDN for styling */}
-      <script src="https://cdn.tailwindcss.com"></script>
     </div>
   );
 };
