@@ -8,4 +8,5 @@ root.render(
   <React.StrictMode>
     <App />
   </React.StrictMode>
-);Add src/index.js
+);
+Add src/index.js
